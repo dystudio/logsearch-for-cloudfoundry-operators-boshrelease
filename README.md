@@ -1,0 +1,1 @@
+# logsearch-for-cloudfoundry-operators-boshrelease
