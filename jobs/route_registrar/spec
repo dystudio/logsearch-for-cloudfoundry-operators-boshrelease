@@ -1,0 +1,47 @@
+---
+name: route_registrar
+
+description: "Used for registering routes"
+
+templates:
+  route_registrar_ctl.erb: bin/route_registrar_ctl
+  registrar_settings.yml.erb: config/registrar_settings.yml
+	helpers/utils.sh: helpers/utils.sh
+
+packages:
+- route_registrar
+
+properties:
+  cf.system_domain:
+    description: "CF system domain"
+  route_registrar.routes:
+    description: |
+      * Array of hashes determining which routes will be registered.
+      * Each hash should have 'port', 'uris', and 'name' keys.
+      * Additionally, the 'tags' and 'healthcheck' keys are optional.
+      * 'uris' is an array of URIs to register for the 'port'.
+      * 'tags' are included in metrics that gorouter emits to support filtering.
+      * 'healthcheck' is a hash which should have 'name' and 'script_path'.
+      * 'healthcheck.timeout' is optional, and is measured in seconds.
+        The healthcheck timeout defaults to 0, which corresponds to a timeout
+        of infinite duration. Values less than zero are not permitted.
+    example: |
+      - name: my-service
+        port: 12345
+        tags:
+          component: my-service
+          env: production
+        uris:
+          - my-service.system-domain.com
+          - *.my-service.system-domain.com
+        healthcheck:
+          name: my-service-healthcheck
+          script_path: /path/to/script
+          timeout: 5
+      - name: my-debug-endpoint
+        port: 12346
+        uris:
+          - my-service.system-domain.com/debug
+  route_registrar.update_frequency_in_seconds:
+    default: 20
+    description: The delay in seconds between routing updates
