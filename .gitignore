@@ -35,3 +35,9 @@ build/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 config/private.yml
+
+# BOSH stuff
+dev_releases
+.dev_builds
+config/dev.yml
+releases/**/*.tgz
