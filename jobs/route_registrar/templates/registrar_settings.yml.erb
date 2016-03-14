@@ -14,6 +14,7 @@
   end
 %>
 ---
+<% if properties.cf.system_domain %>
 message_bus_servers:
   - host: <%= p('cf.nats.host') %>:<%= p('cf.nats.port') %>
     user: <%= p('cf.nats.username') %>
@@ -47,3 +48,4 @@ routes:
 <% end %>
 
 host: <%= discover_external_ip %>
+<% end %>
