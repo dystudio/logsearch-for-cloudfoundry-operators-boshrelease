@@ -1,0 +1,26 @@
+---
+packages:
+- name: go
+  version: 42abc0b8834659644436b76be93624ace35de437
+  fingerprint: 42abc0b8834659644436b76be93624ace35de437
+  sha1: 12b92149c917e5b5fdee91612c59b9c2e0748352
+  dependencies: []
+- name: route_registrar
+  version: 1556d8d5a5cbc5dc0a3e183d881fc46b3e78df7b
+  fingerprint: 1556d8d5a5cbc5dc0a3e183d881fc46b3e78df7b
+  sha1: 493e6b30d1b075a630f6877e4db9050be0546335
+  dependencies:
+  - go
+jobs:
+- name: route_registrar
+  version: 61cc95040c2c1adfaf638350c13f95c5f709a577
+  fingerprint: 61cc95040c2c1adfaf638350c13f95c5f709a577
+  sha1: 32d1499cbb8d3f321f18822011ecbf233b747906
+license:
+  version: e6c4ccc65c76e75e2338d1edabdcf264d37ee663
+  fingerprint: e6c4ccc65c76e75e2338d1edabdcf264d37ee663
+  sha1: f706c33829dffdade2694e99548e87f7c968a66e
+commit_hash: 56673f77
+uncommitted_changes: true
+name: logsearch-for-cloudfoundry-operators
+version: '2'
