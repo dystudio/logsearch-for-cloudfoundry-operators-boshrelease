@@ -23,6 +23,7 @@ routes:
 <% p("route_registrar.routes").each do |route_config| %>
   - name: <%= route_config['name'] %>
     port: <%= route_config['port'] %>
+    registration_interval: <%= route_config['registration_interval'] %>
     uris:
     - logsearch.<%= p('cf.system_domain') %>
 
@@ -44,6 +45,5 @@ routes:
     <% end %>
 
 <% end %>
-update_frequency: <%= p('route_registrar.update_frequency_in_seconds') %>
 
 host: <%= discover_external_ip %>

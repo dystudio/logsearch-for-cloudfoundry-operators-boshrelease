@@ -14,11 +14,6 @@ packages:
 properties:
   cf.system_domain:
     description: CF system domain
-  route_registrar.routes:
-    description: Routes to registrar
-  route_registrar.update_frequency_in_seconds:
-    default: 20
-    description: The delay in seconds between routing updates
   cf.nats.host:
     description: Hostname/IP of NATS
   cf.nats.port:
@@ -27,3 +22,5 @@ properties:
     description: The user to use when authenticating with NATS
   cf.nats.password:
     description: The password to use when authenticating with NATS
+  route_registrar.routes:
+    description: Routes to registrar
