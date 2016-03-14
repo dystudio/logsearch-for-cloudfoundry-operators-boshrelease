@@ -14,6 +14,11 @@
   end
 %>
 ---
+message_bus_servers:
+  - host: <%= p('cf.nats.host') %>:<%= p('cf.nats.port') %>
+    user: <%= p('cf.nats.username') %>
+    password: <%= p('cf.nats.password') %>
+
 routes:
 <% p("route_registrar.routes").each do |route_config| %>
   - name: <%= route_config['name'] %>

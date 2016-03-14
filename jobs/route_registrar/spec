@@ -19,3 +19,11 @@ properties:
   route_registrar.update_frequency_in_seconds:
     default: 20
     description: The delay in seconds between routing updates
+  cf.nats.host:
+    description: Hostname/IP of NATS
+  cf.nats.port:
+    description: Port that NATS listens on
+  cf.nats.username:
+    description: The user to use when authenticating with NATS
+  cf.nats.password:
+    description: The password to use when authenticating with NATS
