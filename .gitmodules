@@ -1,3 +1,9 @@
 [submodule "src/route-registrar"]
 	path = src/route-registrar
 	url = git@github.com:cloudfoundry-incubator/route-registrar.git
+[submodule "src/logsearch-config/src/logsearch-config/vendor/logsearch-boshrelease"]
+	path = src/logsearch-config/src/logsearch-config/vendor/logsearch-boshrelease
+	url = https://github.com/logsearch/logsearch-boshrelease
+[submodule "src/logsearch-config/vendor/logsearch-boshrelease"]
+	path = src/logsearch-config/vendor/logsearch-boshrelease
+	url = https://github.com/logsearch/logsearch-boshrelease
