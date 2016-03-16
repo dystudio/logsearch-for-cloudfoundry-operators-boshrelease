@@ -1,0 +1,9 @@
+#!/bin/bash -ex
+
+logsearch-config/bin/build
+cp logsearch-config/target/logstash-filters-default.conf /tmp
+rm -rf logsearch-config/*
+
+cp /tmp/logstash-filters-default.conf logsearch-config/
+
+

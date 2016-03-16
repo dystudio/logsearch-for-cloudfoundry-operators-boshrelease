@@ -2,5 +2,5 @@
 set -e
 set -x
 
-cp logsearch-config/target/logstash-filters-default.conf $BOSH_INSTALL_TARGET
+cp logsearch-config/logstash-filters-default.conf $BOSH_INSTALL_TARGET
 

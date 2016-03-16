@@ -4,4 +4,4 @@ name: parsing-rules
 dependencies:
 
 files:
-- logsearch-config/target/logstash-filters-default.conf
+- logsearch-config/**/*
