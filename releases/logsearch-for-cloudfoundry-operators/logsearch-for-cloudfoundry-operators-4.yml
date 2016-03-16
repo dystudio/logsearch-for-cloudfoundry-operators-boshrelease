@@ -1,0 +1,29 @@
+---
+packages:
+- name: parsing-rules
+  version: 97530358750f67786768cc510063ccb2ad7b5e75
+  fingerprint: 97530358750f67786768cc510063ccb2ad7b5e75
+  sha1: 5e2b4fb4e06e9dcf20b8446fb9b0732d9f950ba2
+  dependencies: []
+- name: route_registrar
+  version: 489a5559501a3ee6a818eb2c93f4250837871cfd
+  fingerprint: 489a5559501a3ee6a818eb2c93f4250837871cfd
+  sha1: aef894f06713f3df586237e4d2c8a1c2557a1f43
+  dependencies: []
+jobs:
+- name: parsing-rules
+  version: a559e21eab3565f8b6032de9b766c2c742e8f609
+  fingerprint: a559e21eab3565f8b6032de9b766c2c742e8f609
+  sha1: cf07de9dad723069a60b59bd70eb7b3fcce43426
+- name: route_registrar
+  version: 1601bda9e3cf7cb6d6bc55554fddf8a6b26a7e8b
+  fingerprint: 1601bda9e3cf7cb6d6bc55554fddf8a6b26a7e8b
+  sha1: 06b4b74d29e6554746bf65c43a5d644bc467c503
+license:
+  version: e6c4ccc65c76e75e2338d1edabdcf264d37ee663
+  fingerprint: e6c4ccc65c76e75e2338d1edabdcf264d37ee663
+  sha1: f706c33829dffdade2694e99548e87f7c968a66e
+commit_hash: e536945c
+uncommitted_changes: true
+name: logsearch-for-cloudfoundry-operators
+version: '4'
