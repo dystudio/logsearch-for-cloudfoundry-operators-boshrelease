@@ -7,3 +7,6 @@
 [submodule "src/logsearch-config/vendor/logsearch-boshrelease"]
 	path = src/logsearch-config/vendor/logsearch-boshrelease
 	url = https://github.com/logsearch/logsearch-boshrelease
+[submodule "src/firehose-to-syslog"]
+	path = src/firehose-to-syslog
+	url = https://github.com/cloudfoundry-community/firehose-to-syslog
