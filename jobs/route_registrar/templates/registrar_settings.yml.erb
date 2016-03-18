@@ -26,7 +26,7 @@ routes:
     port: <%= route_config['port'] %>
     registration_interval: <%= route_config['registration_interval'] %>
     uris:
-    - logsearch.<%= p('cf.system_domain') %>
+    - <%= route_config["name"] %>.<%= p('cf.system_domain') %>
 
     <% if route_config['tags'] %>
     tags:
