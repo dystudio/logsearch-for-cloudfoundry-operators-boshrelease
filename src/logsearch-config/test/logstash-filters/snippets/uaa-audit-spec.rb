@@ -14,53 +14,9 @@ describe "UAA Audit Spec Logs" do
   describe "UAA Audit events" do
     describe "common fields" do
       when_parsing_log(
-        "@type" => "syslog",
-        "syslog_program" => "vcap.uaa",
-        "@message" => "[job=uaajob index=1]  [2015-08-25 04:57:46.033] uaa - 4176 [http-bio-8080-exec-4] ....  INFO --- Audit: UserAuthenticationSuccess ('admin'): principal=f63e0165-b85a-40d3-9ef7-78c6698ccb2c, origin=[remoteAddress=52.19.1.74, clientId=cf], identityZoneId=[uaa]"
-      ) do
-
-        it "adds the uaa-audit tag" do
-          expect(subject["tags"]).to include "uaa-audit"
-        end
-
-        it "sets @type to uaa-audit" do
-          expect(subject["@type"]).to eq "uaa-audit"
-        end
-
-        it "sets @level to the loglevel" do
-          expect(subject["@level"]).to eq "INFO"
-        end
-
-        it "sets @timestamp" do
-          expect(subject["@timestamp"]).to eq Time.iso8601("2015-08-25T03:57:46.033Z")
-        end
-
-        it "removes the original timestamp field" do
-          expect(subject["uaa_timestamp"]).to be_nil
-        end
-
-        it "sets @source.component" do
-          expect(subject["@source"]["component"]).to eq "UAA"
-        end
-
-        it "sets @source.name" do
-          expect(subject["@source"]["name"]).to eq "uaajob/1"
-        end
-
-        it "sets @source.instance" do
-          expect(subject["@source"]["instance"]).to eq 1
-        end
-
-        it "extracts remote address" do
-          expect(subject["UAA"]["remote_address"]).to eq "52.19.1.74"
-        end
-      end
-    end
-
-    describe "UserAuthenticationSuccess" do
-      when_parsing_log(
-        "@type" => "syslog",
-        "syslog_program" => "vcap.uaa",
+        "@source" => {
+          "program" => "uaa"
+        },
         "@message" => "[2015-08-25 04:57:46.033] uaa - 4176 [http-bio-8080-exec-4] ....  INFO --- Audit: UserAuthenticationSuccess ('admin'): principal=f63e0165-b85a-40d3-9ef7-78c6698ccb2c, origin=[remoteAddress=52.19.1.74, clientId=cf], identityZoneId=[uaa]"
       ) do
 
@@ -84,16 +40,38 @@ describe "UAA Audit Spec Logs" do
           expect(subject["uaa_timestamp"]).to be_nil
         end
 
-        it "sets @source.component" do
-          expect(subject["@source"]["component"]).to eq "UAA"
+        it "extracts remote address" do
+          expect(subject["UAA"]["remote_address"]).to eq "52.19.1.74"
+        end
+      end
+    end
+
+    describe "UserAuthenticationSuccess" do
+      when_parsing_log(
+        "@source" => {
+          "program" => "uaa"
+        },
+        "@message" => "[2015-08-25 04:57:46.033] uaa - 4176 [http-bio-8080-exec-4] ....  INFO --- Audit: UserAuthenticationSuccess ('admin'): principal=f63e0165-b85a-40d3-9ef7-78c6698ccb2c, origin=[remoteAddress=52.19.1.74, clientId=cf], identityZoneId=[uaa]"
+      ) do
+
+        it "adds the uaa-audit tag" do
+          expect(subject["tags"]).to include "uaa-audit"
         end
 
-        it "does not set @source.name" do
-          expect(subject["@source"]["name"]).to be_nil
+        it "sets @type to uaa-audit" do
+          expect(subject["@type"]).to eq "uaa-audit"
         end
 
-        it "does not set @source.instance" do
-          expect(subject["@source"]["instance"]).to be_nil
+        it "sets @level to the loglevel" do
+          expect(subject["@level"]).to eq "INFO"
+        end
+
+        it "sets @timestamp" do
+          expect(subject["@timestamp"]).to eq Time.iso8601("2015-08-25T03:57:46.033Z")
+        end
+
+        it "removes the original timestamp field" do
+          expect(subject["uaa_timestamp"]).to be_nil
         end
 
         it "extracts the UAA PID" do
@@ -128,8 +106,9 @@ describe "UAA Audit Spec Logs" do
 
     describe "TokenIssuedEvent" do
       when_parsing_log(
-        "@type" => "syslog",
-        "syslog_program" => "vcap.uaa",
+        "@source" => {
+          "program" => "uaa"
+        },
         "@message" => '[2015-08-25 04:57:46.143] uaa - 4176 [http-bio-8080-exec-4] ....  INFO --- Audit: TokenIssuedEvent (\'["cloud_controller.admin","cloud_controller.write","doppler.firehose","openid","scim.read","cloud_controller.read","password.write","scim.write"]\'): principal=f63e0165-b85a-40d3-9ef7-78c6698ccb2c, origin=[client=cf, user=admin], identityZoneId=[uaa]'
       ) do
 
@@ -157,9 +136,10 @@ describe "UAA Audit Spec Logs" do
 
     describe "UserNotFound" do
       when_parsing_log(
-        "@type" => "syslog",
-        "syslog_program" => "vcap.uaa",
-        "@message" => "<14>2015-08-26T06:44:05.744726+00:00 10.0.16.19 vcap.uaa [job=uaa-partition-7c53ed3ae2e7f5543b91 index=0]  [2015-08-26 06:44:05.744] uaa - 4159 [http-bio-8080-exec-7] ....  INFO --- Audit: UserNotFound (''): principal=1S0lQEF695QPAYN7mnBqQ0HpJVc=, origin=[remoteAddress=80.229.7.108], identityZoneId=[uaa]"
+        "@source" => {
+          "program" => "uaa"
+        },
+        "@message" => "[2015-08-26 06:44:05.744] uaa - 4159 [http-bio-8080-exec-7] ....  INFO --- Audit: UserNotFound (''): principal=1S0lQEF695QPAYN7mnBqQ0HpJVc=, origin=[remoteAddress=80.229.7.108], identityZoneId=[uaa]"
       ) do
 
         it "extracts the UAA log type" do
