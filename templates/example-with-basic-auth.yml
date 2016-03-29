@@ -1,0 +1,21 @@
+releases:
+- (( merge ))
+- name: logsearch-for-cloudfoundry-operators
+  version: latest
+
+jobs:
+- name: parser
+  templates:
+  - (( merge ))
+  - {name: parsing-rules release: logsearch-for-cloudfoundry-operators}
+  properties:
+    logstash_parser:
+      filters:
+        - logsearch-for-cf: /var/vcap/packages/parsing-rules/logstash-filters-default.conf
+
+ properties:
+   haproxy:
+     kibana:
+       auth:
+         username: user
+         password: password
