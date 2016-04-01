@@ -20,6 +20,8 @@ properties:
     description: "URI of the CF cloud controller"
   cloudfoundry.doppler_endpoint:
     description: "URI of the loggregator endpoint"
+  cloudfoundry.system_domain:
+    description: "CloudFoundry system domain"
   cloudfoundry.skip_ssl_validation:
     description: "Set to true to skip SSL validation when connecting to CF (defaults to false)"
     default: false

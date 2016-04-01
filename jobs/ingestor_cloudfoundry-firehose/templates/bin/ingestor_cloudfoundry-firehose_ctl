@@ -44,10 +44,6 @@ case $1 in
 
     DOPPLER_URL=<%= properties.cloudfoundry.doppler_endpoint %>
 
-    if [ -z $DOPPLER_URL ]; then
-      DOPPLER_URL=wss://doppler.<%= properties.cloudfoundry.system_domain %>
-    fi
-
     exec chpst -u vcap:vcap firehose-to-syslog \
         --api-endpoint=<%= p("cloudfoundry.api_endpoint") %> \
         --doppler-endpoint=$DOPPLER_URL \
