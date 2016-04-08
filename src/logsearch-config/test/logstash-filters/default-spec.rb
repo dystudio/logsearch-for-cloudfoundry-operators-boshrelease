@@ -7,7 +7,7 @@ describe "The combined parsing rules" do
     load_filters <<-CONFIG
       filter {
     #{File.read('vendor/logsearch-boshrelease/src/logsearch-config/target/logstash-filters-default.conf')}
-    #{File.read('target/logstash-filters-default.conf')}
+    #{File.read('target/logstash-filters-default.conf').gsub(/\/var\/vcap\/.*(?=")/, "#{Dir.pwd}/target/deployment_lookup.yml")}
       }
     CONFIG
   end

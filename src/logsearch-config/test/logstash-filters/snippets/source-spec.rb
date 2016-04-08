@@ -4,9 +4,10 @@ require 'test/filter_test_helpers'
 describe "Extracting @source information" do
 
   before(:all) do
+    # change path of the source.deployment translation table so it works in test
     load_filters <<-CONFIG
       filter {
-        #{File.read("src/logstash-filters/snippets/source.conf")}
+        #{File.read("src/logstash-filters/snippets/source.conf").gsub(/\/var\/vcap\/.*(?=")/, "#{Dir.pwd}/target/deployment_lookup.yml")}
       }
     CONFIG
   end
@@ -21,6 +22,14 @@ describe "Extracting @source information" do
 
       it "adds the source tag" do
         expect(subject["tags"]).to include "source"
+      end
+
+      it "adds the deployment tagger tag" do
+        expect(subject["tags"]).to include "auto_deployment"
+      end
+
+      it "sets @source.deployment" do
+        expect(subject["@source"]["deployment"]).to eq "Unknown"
       end
 
       it "sets @source.vm" do
@@ -50,4 +59,79 @@ describe "Extracting @source information" do
     end
   end
 
+  describe "Deployment lookup" do
+    context "when source is a CF job" do
+      when_parsing_log(
+        "@source" => { "job" => "diego_cell-123123123" }
+      ) do
+
+        it "adds the deployment tagger tag" do
+          expect(subject["tags"]).to include "auto_deployment"
+        end
+
+        it "sets @source.deployment" do
+          expect(subject["@source"]["deployment"]).to eq "CF"
+        end
+      end
+    end
+
+    context "when source is a rabbitmq job" do
+      when_parsing_log(
+        "@source" => { "job" => "rabbitmq-broker-123123123" }
+      ) do
+
+        it "adds the deployment tagger tag" do
+          expect(subject["tags"]).to include "auto_deployment"
+        end
+
+        it "sets @source.deployment" do
+          expect(subject["@source"]["deployment"]).to eq "rabbitmq"
+        end
+      end
+    end
+
+    context "when source is a mysql job" do
+      when_parsing_log(
+        "@source" => { "job" => "proxy-partition-123123123" }
+      ) do
+
+        it "adds the deployment tagger tag" do
+          expect(subject["tags"]).to include "auto_deployment"
+        end
+
+        it "sets @source.deployment" do
+          expect(subject["@source"]["deployment"]).to eq "mysql"
+        end
+      end
+    end
+    context "when source is a redis job" do
+      when_parsing_log(
+        "@source" => { "job" => "dedicated-node-partition-123123123" }
+      ) do
+
+        it "adds the deployment tagger tag" do
+          expect(subject["tags"]).to include "auto_deployment"
+        end
+
+        it "sets @source.deployment" do
+          expect(subject["@source"]["deployment"]).to eq "redis"
+        end
+      end
+    end
+
+    context "when source is a logsearch job" do
+      when_parsing_log(
+        "@source" => { "job" => "kibana-123123123" }
+      ) do
+
+        it "adds the deployment tagger tag" do
+          expect(subject["tags"]).to include "auto_deployment"
+        end
+
+        it "sets @source.deployment" do
+          expect(subject["@source"]["deployment"]).to eq "logsearch"
+        end
+      end
+    end
+  end
 end

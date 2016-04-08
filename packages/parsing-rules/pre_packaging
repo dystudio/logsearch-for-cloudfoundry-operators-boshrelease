@@ -2,8 +2,9 @@
 
 logsearch-config/bin/build
 cp logsearch-config/target/logstash-filters-default.conf /tmp
+cp logsearch-config/target/deployment_lookup.yml /tmp
 rm -rf logsearch-config/*
 
 cp /tmp/logstash-filters-default.conf logsearch-config/
-
+cp /tmp/deployment_lookup.yml logsearch-config/
 
