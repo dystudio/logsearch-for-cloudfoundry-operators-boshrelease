@@ -8,8 +8,9 @@ clock_global.*: CF
 etcd_server.*: CF
 consul_server.*: CF
 nfs_server.*: CF
-nats_server.*: CF
-doppler_server.*: CF
+nats.*: CF
+doppler.*: CF
+loggregator_trafficcontroller.*: CF
 mysql.*: CF
 mysql_proxy.*: CF
 router.*: CF
@@ -30,3 +31,4 @@ maintenance.*: logsearch
 parser.*: logsearch
 queue.*: logsearch
 router.*: logsearch
+monitor.*: logsearch
