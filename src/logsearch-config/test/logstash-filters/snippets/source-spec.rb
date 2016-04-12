@@ -24,14 +24,6 @@ describe "Extracting @source information" do
         expect(subject["tags"]).to include "source"
       end
 
-      it "adds the deployment tagger tag" do
-        expect(subject["tags"]).to include "auto_deployment"
-      end
-
-      it "sets @source.deployment" do
-        expect(subject["@source"]["deployment"]).to eq "Unknown"
-      end
-
       it "sets @source.vm" do
         expect(subject["@source"]["vm"]).to eq "api_z2/1"
       end
@@ -56,82 +48,6 @@ describe "Extracting @source information" do
         expect(subject["@message"]).to eq '{"timestamp":1458648262.0071645,"message":"Statsd: cc.requests.outstanding:-1|c\ncc.requests.completed:1|c\ncc.http_status.2XX:1|c","log_level":"debug","source":"statsd.client","data":{},"thread_id":47073447296880,"fiber_id":47073444675740,"process_id":3255,"file":"/var/vcap/packages/cloud_controller_ng/cloud_controller_ng/vendor/bundle/ruby/2.2.0/gems/statsd-ruby-1.2.1/lib/statsd.rb","lineno":254,"method":"send_to_socket"}'
       end
 
-    end
-  end
-
-  describe "Deployment lookup" do
-    context "when source is a CF job" do
-      when_parsing_log(
-        "@source" => { "job" => "diego_cell-123123123" }
-      ) do
-
-        it "adds the deployment tagger tag" do
-          expect(subject["tags"]).to include "auto_deployment"
-        end
-
-        it "sets @source.deployment" do
-          expect(subject["@source"]["deployment"]).to eq "CF"
-        end
-      end
-    end
-
-    context "when source is a rabbitmq job" do
-      when_parsing_log(
-        "@source" => { "job" => "rabbitmq-broker-123123123" }
-      ) do
-
-        it "adds the deployment tagger tag" do
-          expect(subject["tags"]).to include "auto_deployment"
-        end
-
-        it "sets @source.deployment" do
-          expect(subject["@source"]["deployment"]).to eq "rabbitmq"
-        end
-      end
-    end
-
-    context "when source is a mysql job" do
-      when_parsing_log(
-        "@source" => { "job" => "proxy-partition-123123123" }
-      ) do
-
-        it "adds the deployment tagger tag" do
-          expect(subject["tags"]).to include "auto_deployment"
-        end
-
-        it "sets @source.deployment" do
-          expect(subject["@source"]["deployment"]).to eq "mysql"
-        end
-      end
-    end
-    context "when source is a redis job" do
-      when_parsing_log(
-        "@source" => { "job" => "dedicated-node-partition-123123123" }
-      ) do
-
-        it "adds the deployment tagger tag" do
-          expect(subject["tags"]).to include "auto_deployment"
-        end
-
-        it "sets @source.deployment" do
-          expect(subject["@source"]["deployment"]).to eq "redis"
-        end
-      end
-    end
-
-    context "when source is a logsearch job" do
-      when_parsing_log(
-        "@source" => { "job" => "kibana-123123123" }
-      ) do
-
-        it "adds the deployment tagger tag" do
-          expect(subject["tags"]).to include "auto_deployment"
-        end
-
-        it "sets @source.deployment" do
-          expect(subject["@source"]["deployment"]).to eq "logsearch"
-        end
-      end
     end
   end
 end
