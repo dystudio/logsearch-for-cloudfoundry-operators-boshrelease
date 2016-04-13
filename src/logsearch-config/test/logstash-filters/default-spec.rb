@@ -50,4 +50,16 @@ describe "The combined parsing rules" do
       end
     end
   end
+
+  describe "when parsing ContainerMetric logs" do
+    when_parsing_log(
+      "@type" => "syslog",
+      "@message" => '<6>2016-04-12T10:18:19Z 0156bb68-1673-415f-a48c-f0783e44d156 doppler[4188]: {"cf_app_id":"6a4fa603-d03d-4d5d-9efc-73c4e815e053","cf_app_name":"notifications-ui","cf_org_id":"b152d3f9-ea0a-487a-b00c-688185a6ebcd","cf_org_name":"system","cf_origin":"firehose","cf_space_id":"0f7c1e0e-e9b5-4afe-a095-71a058afcb1f","cf_space_name":"notifications-with-ui","cpu_percentage":0.019206287207808037,"disk_bytes":17309696,"event_type":"ContainerMetric","instance_index":0,"level":"info","memory_bytes":11165696,"msg":"","origin":"rep","time":"2016-04-12T10:18:19Z"}'
+    ) do
+
+      it "adds the source tag" do
+        expect(subject["tags"]).to include "ContainerMetric"
+      end
+    end
+  end
 end
