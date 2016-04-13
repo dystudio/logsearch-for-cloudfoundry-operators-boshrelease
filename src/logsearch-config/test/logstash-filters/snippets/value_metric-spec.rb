@@ -60,7 +60,7 @@ describe "ValueMetric events" do
     end
 
     it "drops ValueMetric.cf_origin" do
-      expect(subject["ValueMetric"]["w"]).to eq nil
+      expect(subject["ValueMetric"]["cf_origin"]).to eq nil
     end
   end
 end
