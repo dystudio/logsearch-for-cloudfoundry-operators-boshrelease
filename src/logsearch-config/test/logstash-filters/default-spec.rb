@@ -38,4 +38,16 @@ describe "The combined parsing rules" do
       end
     end
   end
+
+  describe "when parsing ValueMetric logs" do
+    when_parsing_log(
+      "@type" => "syslog",
+      "@message" => '<6>2016-04-12T09:50:54Z 95c570e0-c2eb-4f43-b33e-69a456fe96f0 doppler[4176]: {"cf_origin":"firehose","event_type":"ValueMetric","level":"info","msg":"","name":"logSenderTotalMessagesRead","origin":"p-rabbitmq","time":"2016-04-12T09:50:54Z","unit":"count","value":123}'
+    ) do
+
+      it "adds the source tag" do
+        expect(subject["tags"]).to include "ValueMetric"
+      end
+    end
+  end
 end
