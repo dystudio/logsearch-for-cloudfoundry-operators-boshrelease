@@ -26,4 +26,16 @@ describe "The combined parsing rules" do
       end
     end
   end
+
+  describe "when parsing CounterEvent metrics" do
+    when_parsing_log(
+      "@type" => "syslog",
+      "@message" => '<6>2016-04-12T10:16:37Z 95c570e0-c2eb-4f43-b33e-69a456fe96f0 doppler[4176]: {"cf_origin":"firehose","delta":10,"event_type":"CounterEvent","level":"info","msg":"","name":"dropsondeMarshaller.counterEventMarshalled","origin":"MetronAgent","time":"2016-04-12T10:16:37Z","total":3770256}'
+    ) do
+
+      it "adds the source tag" do
+        expect(subject["tags"]).to include "CounterEvent"
+      end
+    end
+  end
 end
