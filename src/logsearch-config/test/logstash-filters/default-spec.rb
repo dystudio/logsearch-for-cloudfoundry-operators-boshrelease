@@ -62,4 +62,17 @@ describe "The combined parsing rules" do
       end
     end
   end
+
+
+  describe "when parsing LogMessage logs" do
+    when_parsing_log(
+      "@type" => "syslog",
+      "@message" => '<6>2016-04-12T10:04:31Z 95c570e0-c2eb-4f43-b33e-69a456fe96f0 doppler[4176]: {"cf_app_id":"cfcb2d5a-244a-4c51-b22b-8562d13822a9","cf_app_name":"chatty-app","cf_org_id":"8b877d32-d147-4729-a8be-33df22f9221e","cf_org_name":"test","cf_origin":"firehose","cf_space_id":"d58e7bc0-72d0-45ef-9fdc-cdd168dee98b","cf_space_name":"test","event_type":"LogMessage","level":"info","message_type":"OUT","msg":"{\"data\":\"di7xex8gsfer85yykodbbi97qtaf3xrz\",\"time\":\"1460455471\"}","origin":"rep","source_instance":"3","source_type":"APP","time":"2016-04-12T10:04:31Z","timestamp":1460455471700095202}'
+    ) do
+
+      it "adds the source tag" do
+        expect(subject["tags"]).to include "LogMessage"
+      end
+    end
+  end
 end
