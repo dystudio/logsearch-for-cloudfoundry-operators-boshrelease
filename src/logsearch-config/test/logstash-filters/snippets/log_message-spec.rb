@@ -20,7 +20,7 @@ describe "LogMessage events" do
     end
 
     it "sets @timestamp" do
-      expect(subject["@timestamp"]).to eq Time.iso8601("2016-04-12T10:04:31Z")
+      expect(subject["@timestamp"]).to eq Time.iso8601("2016-04-12T10:04:31.700Z")
     end
 
     it "sets @timestamp_ns" do
