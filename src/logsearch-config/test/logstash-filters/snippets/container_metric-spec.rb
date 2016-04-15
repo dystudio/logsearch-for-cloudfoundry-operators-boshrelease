@@ -31,6 +31,10 @@ describe "ContainerMetric events" do
       expect(subject["@type"]).to eq "ContainerMetric"
     end
 
+    it "sets @source.index" do
+      expect(subject["@source"]["index"]).to eq 0
+    end
+
 		it "should set cf.app_id" do
 		  expect(subject["cf"]["app_id"]).to eq "6a4fa603-d03d-4d5d-9efc-73c4e815e053"
 		end
@@ -81,6 +85,14 @@ describe "ContainerMetric events" do
 
     it "drops ContainerMetric.origin" do
       expect(subject["ContainerMetric"]["origin"]).to eq nil
+    end
+
+    it "drops ContainerMetric.cf_origin" do
+      expect(subject["ContainerMetric"]["cf_origin"]).to eq nil
+    end
+
+    it "drops ContainerMetric.instance_index" do
+      expect(subject["ContainerMetric"]["instance_index"]).to eq nil
     end
   end
 end
