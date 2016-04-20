@@ -6,7 +6,7 @@ describe "UAA Audit Spec Logs" do
   before(:all) do
     load_filters <<-CONFIG
       filter {
-        #{File.read("src/logstash-filters/snippets/uaa.conf")}
+        #{File.read("src/logstash-filters/snippets/uaa-audit.conf")}
       }
     CONFIG
   end
