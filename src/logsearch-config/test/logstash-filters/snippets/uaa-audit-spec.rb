@@ -164,4 +164,18 @@ describe "UAA Audit Spec Logs" do
       end
     end
   end
+
+  context "when log is not a UAA audit log entry" do
+    when_parsing_log(
+      "@source" => {
+        "program" => "uaa"
+      },
+      "@message" => "[2016-04-20 14:47:49.000] uaa - 19020 [localhost-startStop-1] ....  INFO --- DispatcherServlet: FrameworkServlet 'spring': initialization completed in 25509 ms"
+    ) do
+
+      it "does not add fail/cloudfoundry/uaa-audit tag" do
+        expect(subject["tags"]).to_not include "fail/cloudfoundry/uaa-audit"
+      end
+    end
+  end
 end
