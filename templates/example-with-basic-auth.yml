@@ -14,7 +14,7 @@ jobs:
       - logsearch-for-cf: /var/vcap/packages/parsing-rules/logstash-filters-default.conf
 
 
-- name: haproxy
+- name: ls-router
   instances: 1
   templates:
   - (( merge ))
@@ -46,7 +46,7 @@ jobs:
       firehose_password: firehose-password
       firehose_events: "HttpStart,HttpStop,HttpStartStop,LogMessage,ValueMetric,CounterEvent,Error,ContainerMetric,HttpStart"
     syslog:
-      host: (( grab jobs.haproxy.networks.default.static_ips.[0] ))
+      host: (( grab jobs.ls-router.networks.default.static_ips.[0] ))
       port: 514
 
 properties:
