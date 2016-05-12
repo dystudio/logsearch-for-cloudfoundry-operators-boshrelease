@@ -17,7 +17,7 @@ properties:
     default: "NONE"
 
   cloudfoundry.api_endpoint:
-    description: "URI of the CF cloud controller"
+    description: URI of the CF cloud controller
   cloudfoundry.doppler_endpoint:
     description: "URI of the loggregator endpoint"
   cloudfoundry.system_domain:
