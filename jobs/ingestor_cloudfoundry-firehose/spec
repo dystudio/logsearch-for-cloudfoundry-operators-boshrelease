@@ -36,6 +36,11 @@ properties:
     description: "Comma seperated list of events you would like. Valid options are HttpStop, CounterEvent, Error, Heartbeat, HttpStart, HttpStartStop, LogMessage, ValueMetric, ContainerMetric"
     default: "LogMessage,Error,ContainerMetric"
 
+  firehose:
+    subscription_id:
+      description: "The subscription ID to use when connecting to the firehose"
+      default: "logsearch"
+
   syslog.host:
     description: IP or hostname of the syslog drain
   syslog.port:
