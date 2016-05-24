@@ -1,0 +1,59 @@
+releases:
+- (( merge ))
+- name: logsearch-for-cloudfoundry-operators
+  version: latest
+
+jobs:
+- name: parser
+  templates:
+  - (( merge ))
+  - {name: parsing-rules, release: logsearch-for-cloudfoundry-operators}
+  properties:
+    logstash_parser:
+      filters:
+      - logsearch-for-cf: /var/vcap/packages/parsing-rules/logstash-filters-default.conf
+
+
+- name: ls-router
+  instances: 1
+  templates:
+  - (( merge ))
+  - {name: route_registrar, release: logsearch-for-cloudfoundry-operators}
+
+- name: firehose-to-syslog
+  instances: 0
+  resource_pool: haproxy #because it's small by default
+  networks:
+  - name: default
+  templates:
+  - { release: logsearch-for-cloudfoundry-operators, name: ingestor_cloudfoundry-firehose }
+  properties:
+    cloudfoundry:
+      api_endpoint: cf_api_url
+      system_domain: cf_system_domain
+      skip_ssl_validation: false
+      firehose_port: 4443
+      firehose_user: doppler
+      firehose_password: firehose-password
+      firehose_events: "HttpStart,HttpStop,HttpStartStop,LogMessage,ValueMetric,CounterEvent,Error,ContainerMetric,HttpStart"
+    syslog:
+      host: (( grab jobs.ls-router.networks.default.static_ips.[0] ))
+      port: 514
+
+properties:
+  haproxy:
+    kibana:
+      auth:
+        username: username
+        password: password
+    cluster_monitor:
+      auth:
+        username: username
+        password: password
+  cf:
+    system_domain: cf_system_domain
+    nats:
+      host: nats-ip
+      port: 4222
+      username: nats
+      password: nats-password
