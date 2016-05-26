@@ -18,7 +18,6 @@ export GOOS=linux
 go build
 popd
 
-tree -L 2 $COMPILE_DIR
 mv $COMPILE_DIR/route-registrar /tmp/
 rm -rf route-registrar/* route-registrar/.git*
 rm -rf $COMPILE_DIR
