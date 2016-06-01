@@ -7,11 +7,11 @@
 	1. Click on Create Bucket
 	1. Create a bucket with a unique name
 	
-1. Create Archiver policy
+1. Create archiver policy
 	1. Go to AWS IAM
 	1. Go to Policies
 	1. Click on Create Policy
-	1. Click on Create you own Policy
+	1. Click on Create your own Policy
 	1. Give the policy a name
 	1. Copy and paste the following policy code to Policy Document:
 	
