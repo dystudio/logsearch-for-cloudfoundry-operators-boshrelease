@@ -16,25 +16,25 @@
 	1. Copy and paste the following policy code to Policy Document:
 	
         ```JSON
-	{
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "ServiceBackupPolicy",
-        "Effect": "Allow",
-        "Action": [
-          "s3:ListBucket",
-          "s3:ListBucketMultipartUploads",
-          "s3:ListMultipartUploadParts",
-          "s3:PutObject"
-        ],
-        "Resource": [
-          "arn:aws:s3:::BUCKET_NAME/*",
-          "arn:aws:s3:::BUCKET_NAME"
-        ]
-      }
-    ]
-  }
+	  {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "ServiceBackupPolicy",
+          "Effect": "Allow",
+          "Action": [
+            "s3:ListBucket",
+            "s3:ListBucketMultipartUploads",
+            "s3:ListMultipartUploadParts",
+            "s3:PutObject"
+          ],
+          "Resource": [
+            "arn:aws:s3:::BUCKET_NAME/*",
+            "arn:aws:s3:::BUCKET_NAME"
+          ]
+        }
+      ]
+    }
         ```
         
   1. Change BUCKET_NAME to the name of the previously created bucket.
