@@ -14,7 +14,11 @@ jobs:
       - logsearch-for-cf: /var/vcap/packages/parsing-rules/logstash-filters-default.conf
 
 - name: deploy_logsearch_monitor_dashboards
+  instances: 1
   lifecycle: errand
+  resource_pool: errand
+  networks:
+  - name: default
   templates:
   - {name: push_dashboards, release: logsearch-for-cloudfoundry-operators}
   properties:
