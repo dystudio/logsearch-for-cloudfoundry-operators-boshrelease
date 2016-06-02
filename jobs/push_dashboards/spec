@@ -1,0 +1,16 @@
+---
+name: push_dashboards
+
+templates:
+  bin/run: bin/run
+
+packages:
+- dashboards
+
+properties:
+  push_dashboards.elasticsearch.host:
+    description: ElasticSearch master node host
+  push_dashboards.elasticsearch.port:
+    description: ElasticSearch master node port
+    default: 9200
+

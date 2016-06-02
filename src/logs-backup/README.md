@@ -77,7 +77,13 @@
         
   1. Change AWS_KEY_ID and AWS_ACCESS_KEY to `Access Key Id` and `Secret Access Key` respectively from the credentials downloaded in the previous step
   1. Deploy
-            
-        
 
-  
+## Update the Archiver dashboard
+
+1. Create your dashboard
+1. Export the required visualisations, searches and dashboards
+1. Run `ruby src/dashboards/process.rb /path/to/exported/*.json > src/dashboards/archiver_dashboard.txt`
+1. Deploy and run the errand
+  ```bash
+  $> bosh run errand deploy_logsearch_monitor_dashboards
+  ```

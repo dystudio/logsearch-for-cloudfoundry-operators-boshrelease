@@ -1,0 +1,19 @@
+#!/bin/bash -ex
+
+curl "http://<%= p("push_dashboards.elasticsearch.host") %>:<%= p("push_dashboards.elasticsearch.port") %>/_cluster/health?wait_for_status=green"
+
+HTTP_CODE=$(curl -s -w '%{http_code}' -o /tmp/response.txt -X PUT \
+  --data-binary @"/var/vcap/packages/dashboards/archiver_dashboard.txt" \
+  "http://<%= p("push_dashboards.elasticsearch.host") %>:<%= p("push_dashboards.elasticsearch.port") %>/_bulk")
+
+if grep --quiet "\"errors\":true" /tmp/response.txt ; then
+  cat /tmp/response.txt > /dev/stderr
+  exit 1
+fi
+
+if [ "$HTTP_CODE" -le "300" ]; then
+  cat /tmp/response.txt
+else
+  cat /tmp/response.txt > /dev/stderr
+  exit $HTTP_CODE
+fi

@@ -13,6 +13,15 @@ jobs:
       filters:
       - logsearch-for-cf: /var/vcap/packages/parsing-rules/logstash-filters-default.conf
 
+- name: deploy_logsearch_monitor_dashboards
+  lifecycle: errand
+  templates:
+  - {name: push_dashboards, release: logsearch-for-cloudfoundry-operators}
+  properties:
+    push_dashboards:
+      elasticsearch:
+        host: (( grab jobs.cluster_monitor.networks.default.static_ips.[0] ))
+        port: 9200
 
 - name: ls-router
   instances: 1

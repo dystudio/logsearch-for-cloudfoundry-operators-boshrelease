@@ -40,6 +40,16 @@ jobs:
       host: (( grab jobs.ls-router.networks.default.static_ips.[0] ))
       port: 514
 
+- name: deploy_logsearch_monitor_dashboards
+  lifecycle: errand
+  templates:
+  - {name: push_dashboards, release: logsearch-for-cloudfoundry-operators}
+  properties:
+    push_dashboards:
+      elasticsearch:
+        host: (( grab jobs.cluster_monitor.networks.default.static_ips.[0] ))
+        port: 9200
+
 properties:
   haproxy:
     kibana:
