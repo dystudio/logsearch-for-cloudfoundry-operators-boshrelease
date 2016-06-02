@@ -81,7 +81,7 @@
 ## Update the Archiver dashboard
 
 1. Create your dashboard
-1. Export the required visualisations, searches and dashboards
+1. Export the dashbord and all related visualisations and searches (not just the updated ones) from Settings > Objects
 1. Run `ruby src/dashboards/process.rb /path/to/exported/*.json > src/dashboards/archiver_dashboard.txt`
 1. Deploy and run the errand
   ```bash
