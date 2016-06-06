@@ -14,12 +14,6 @@ jobs:
       - logsearch-for-cf: /var/vcap/packages/parsing-rules/logstash-filters-default.conf
 
 
-- name: ls-router
-  instances: 1
-  templates:
-  - (( merge ))
-  - {name: route_registrar, release: logsearch-for-cloudfoundry-operators}
-
 - name: firehose-to-syslog
   instances: 0
   resource_pool: haproxy #because it's small by default
