@@ -1,0 +1,2 @@
+{"update":{"_index":".kibana","_type":"index-pattern","_id":"logstash-*"}}
+{"doc":{"fieldFormatMap":"{\"archiver.size\":{\"id\":\"bytes\"}}"}}
