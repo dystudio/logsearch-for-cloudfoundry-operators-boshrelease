@@ -1,7 +1,0 @@
----
-name: logs-backup
-
-dependencies:
-
-files:
-- logs-backup/**/*

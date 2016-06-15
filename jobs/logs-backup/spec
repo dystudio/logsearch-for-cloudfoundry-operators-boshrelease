@@ -1,8 +1,0 @@
----
-name: logs-backup
-templates: {}
-
-packages:
-- logs-backup
-
-properties: {}
