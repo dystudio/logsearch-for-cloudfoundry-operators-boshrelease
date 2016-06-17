@@ -1,8 +1,0 @@
----
-name: parsing-rules
-templates: {}
-
-packages:
-- parsing-rules
-
-properties: {}

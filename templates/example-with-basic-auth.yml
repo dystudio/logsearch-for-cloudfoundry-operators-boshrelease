@@ -7,11 +7,11 @@ jobs:
 - name: parser
   templates:
   - (( merge ))
-  - {name: parsing-rules, release: logsearch-for-cloudfoundry-operators}
+  - {name: parsing-rules-for-cf-ops, release: logsearch-for-cloudfoundry-operators}
   properties:
     logstash_parser:
       filters:
-      - logsearch-for-cf: /var/vcap/packages/parsing-rules/logstash-filters-default.conf
+      - logsearch-for-cf: /var/vcap/packages/parsing-rules-for-cf-ops/logstash-filters-default.conf
 
 - name: ls-router
   instances: 1

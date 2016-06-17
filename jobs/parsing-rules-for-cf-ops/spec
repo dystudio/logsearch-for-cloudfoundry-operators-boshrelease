@@ -1,0 +1,8 @@
+---
+name: parsing-rules-for-cf-ops
+templates: {}
+
+packages:
+- parsing-rules-for-cf-ops
+
+properties: {}
