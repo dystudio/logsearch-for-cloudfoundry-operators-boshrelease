@@ -34,20 +34,3 @@ jobs:
       host: (( grab jobs.ls-router.networks.default.static_ips.[0] ))
       port: 514
 
-properties:
-  haproxy:
-    kibana:
-      auth:
-        username: username
-        password: password
-    cluster_monitor:
-      auth:
-        username: username
-        password: password
-  cf:
-    system_domain: cf_system_domain
-    nats:
-      host: nats-ip
-      port: 4222
-      username: nats
-      password: nats-password

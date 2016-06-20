@@ -49,15 +49,6 @@ jobs:
       port: 514
 
 properties:
-  haproxy:
-    kibana:
-      auth:
-        username: username
-        password: password
-    cluster_monitor:
-      auth:
-        username: username
-        password: password
   cf:
     system_domain: cf_system_domain
     nats:
