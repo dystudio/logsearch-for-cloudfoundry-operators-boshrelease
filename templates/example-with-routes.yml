@@ -23,10 +23,14 @@ jobs:
       routes:
       - name: logsearch
         port: 80
+        uris:
+        - (( concat "logsearch." properties.cf.system_domain ))
         registration_interval: 20s
       - name: logsearch_monitor
         port: 8080
         registration_interval: 20s
+        uris:
+        - (( concat "logsearch_monitor." properties.cf.system_domain ))
 
 - name: firehose-to-syslog
   instances: 0
@@ -51,8 +55,8 @@ jobs:
 properties:
   cf:
     system_domain: cf_system_domain
-    nats:
-      host: nats-ip
-      port: 4222
-      username: nats
-      password: nats-password
+  nats:
+    machines: [nats-ip]
+    port: 4222
+    user: nats
+    password: nats-password
