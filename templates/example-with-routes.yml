@@ -18,6 +18,7 @@ jobs:
   templates:
   - (( merge ))
   - {name: route_registrar, release: logsearch-for-cloudfoundry-operators}
+  - {name: syslog_forwarder, release: logsearch}
   properties:
     route_registrar:
       routes:
@@ -31,6 +32,10 @@ jobs:
         registration_interval: 20s
         uris:
         - (( concat "logsearch_monitor." properties.cf.system_domain ))
+    syslog_forwarder:
+      config:
+       - {service: route_registrar, file: /var/vcap/sys/log/route_registrar/route_registrar.stdout.log}
+       - {service: route_registrar, file: /var/vcap/sys/log/route_registrar/route_registrar.stderr.log}
 
 - name: firehose-to-syslog
   instances: 0
