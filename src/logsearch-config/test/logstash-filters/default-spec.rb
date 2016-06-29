@@ -75,4 +75,15 @@ describe "The combined parsing rules" do
       end
     end
   end
+
+  describe "when parsing diego component logs" do
+    when_parsing_log(
+      "@type" => "syslog",
+      "@message" => '<13>2016-06-29T10:04:00.221087+00:00 10.10.114.110 vcap.rep [job=cell_z1 index=75]  {"timestamp":"1467194640.220978260","source":"rep","message":"rep.sync-drivers.discover.Discovering drivers in [/var/vcap/data/voldrivers]","log_level":1,"data":{"session":"6.1705"}}') do
+
+      it "adds the diego/json tag" do
+        expect(subject["tags"]).to include "diego/json"
+      end
+    end
+  end
 end
