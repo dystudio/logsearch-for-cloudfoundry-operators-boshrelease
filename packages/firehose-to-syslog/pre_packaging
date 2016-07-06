@@ -1,4 +1,4 @@
-set -e
+set -ex
 
 export GOOS=linux
 export GOARCH=amd64
@@ -11,8 +11,6 @@ mv firehose-to-syslog "${GOPATH}/src/github.com/cloudfoundry-community/firehose-
 
 # build
 pushd "${GOPATH}/src/github.com/cloudfoundry-community/firehose-to-syslog"
-
-export GOPATH="${GOPATH}:$(pwd)/Godeps/_workspace"
 
 go build -x
 
