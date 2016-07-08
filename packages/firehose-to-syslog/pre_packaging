@@ -12,6 +12,8 @@ mv firehose-to-syslog "${GOPATH}/src/github.com/cloudfoundry-community/firehose-
 # build
 pushd "${GOPATH}/src/github.com/cloudfoundry-community/firehose-to-syslog"
 
+export GOPATH="${GOPATH}:$(pwd)"
+
 go build -x
 
 popd
