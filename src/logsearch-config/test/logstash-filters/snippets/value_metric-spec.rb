@@ -12,7 +12,7 @@ describe "ValueMetric events" do
   when_parsing_log(
     "syslog_program" => "doppler",
     "syslog_hostname" => "95c570e0-c2eb-4f43-b33e-69a456fe96f0",
-    "@message" => '{"cf_origin":"firehose","event_type":"ValueMetric","level":"info","msg":"","name":"logSenderTotalMessagesRead","origin":"p-rabbitmq","time":"2016-04-12T09:50:54Z","unit":"count","value":123}'
+    "@message" => '{"cf_origin":"firehose","deployment":"cf","event_type":"ValueMetric","index":"0","ip":"10.0.16.18","job":"diego_brain-partition-6531e9947fabe4e829e5","level":"info","msg":"","name":"logSenderTotalMessagesRead","origin":"p-rabbitmq","time":"2016-04-12T09:50:54Z","unit":"count","value":123}'
   ) do
 
     it "adds the ValueMetric tag" do
@@ -61,6 +61,22 @@ describe "ValueMetric events" do
 
     it "drops ValueMetric.cf_origin" do
       expect(subject["ValueMetric"]["cf_origin"]).to eq nil
+    end
+
+    it "sets @source.deploymen" do
+      expect(subject["@source"]["deployment"]).to eq "cf"
+    end
+
+    it "sets @source.job" do
+      expect(subject["@source"]["job"]).to eq "diego_brain-partition-6531e9947fabe4e829e5"
+    end
+
+    it "sets @source.index" do
+      expect(subject["@source"]["index"]).to eq "0"
+    end
+
+    it "sets @source.ip" do
+      expect(subject["@source"]["ip"]).to eq "10.0.16.18"
     end
   end
 end
