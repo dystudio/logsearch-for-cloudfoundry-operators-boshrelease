@@ -52,7 +52,7 @@ case $1 in
         --password=<%= p("cloudfoundry.firehose_password") %> \
         --subscription-id="<%= p("firehose.subscription_id") %>" \
         --syslog-server=<%= p("syslog.host") %>:<%= p("syslog.port") %>\
-        --events=<%= p("cloudfoundry.firehose_events") %> \
+        --events=<%= p("cloudfoundry.firehose_events").join(',') %> \
         --boltdb-path=$TMP_DIR/firehose-to-syslog.cache.db \
         --cc-pull-time=60s \<% if p("ingestor_cloudfoundry-firehose.debug") %>
         --debug \<% end%>
