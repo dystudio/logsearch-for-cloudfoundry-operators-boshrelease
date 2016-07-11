@@ -52,7 +52,7 @@ jobs:
       firehose_port: 4443
       firehose_user: doppler
       firehose_password: firehose-password
-      firehose_events: "HttpStart,HttpStop,HttpStartStop,LogMessage,ValueMetric,CounterEvent,Error,ContainerMetric,HttpStart"
+      firehose_events: [HttpStart,HttpStop,HttpStartStop,ValueMetric,CounterEvent,Error,ContainerMetric,HttpStart]
     syslog:
       host: (( grab jobs.ls-router.networks.default.static_ips.[0] ))
       port: 514
