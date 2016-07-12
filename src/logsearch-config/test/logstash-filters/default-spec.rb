@@ -27,51 +27,52 @@ describe "The combined parsing rules" do
     end
   end
 
-  describe "when parsing CounterEvent metrics" do
-    when_parsing_log(
-      "@type" => "syslog",
-      "@message" => '<6>2016-04-12T10:16:37Z 95c570e0-c2eb-4f43-b33e-69a456fe96f0 doppler[4176]: {"cf_origin":"firehose","delta":10,"event_type":"CounterEvent","level":"info","msg":"","name":"dropsondeMarshaller.counterEventMarshalled","origin":"MetronAgent","time":"2016-04-12T10:16:37Z","total":3770256}'
-    ) do
+  describe "when parsing firehose logs" do
+    context "when parsing CounterEvent metrics" do
+      when_parsing_log(
+        "@type" => "syslog",
+        "@message" => '<6>2016-07-12T15:11:01Z 916d7a73-7f3b-467e-b50e-0e5b07690ea3 doppler[12128]: {"cf_origin":"firehose","delta":5,"deployment":"cf","event_type":"CounterEvent","index":"0","ip":"10.0.16.6","job":"consul_server-partition-6531e9947fabe4e829e5","level":"info","msg":"","name":"udp.sentMessageCount","origin":"MetronAgent","time":"2016-07-12T15:11:01Z","total":318392}'
+      ) do
 
-      it "adds the source tag" do
-        expect(subject["tags"]).to include "CounterEvent"
+        it "adds the source tag" do
+          expect(subject["tags"]).to include "firehose"
+        end
       end
     end
-  end
 
-  describe "when parsing ValueMetric logs" do
-    when_parsing_log(
-      "@type" => "syslog",
-      "@message" => '<6>2016-04-12T09:50:54Z 95c570e0-c2eb-4f43-b33e-69a456fe96f0 doppler[4176]: {"cf_origin":"firehose","event_type":"ValueMetric","level":"info","msg":"","name":"logSenderTotalMessagesRead","origin":"p-rabbitmq","time":"2016-04-12T09:50:54Z","unit":"count","value":123}'
-    ) do
+    describe "when parsing ValueMetric logs" do
+      when_parsing_log(
+        "@type" => "syslog",
+        "@message" => '<6>2016-07-11T15:36:56Z 916d7a73-7f3b-467e-b50e-0e5b07690ea3 doppler[12128]: {"cf_origin":"firehose","deployment":"cf","event_type":"ValueMetric","index":"0","ip":"10.0.16.18","job":"diego_brain-partition-6531e9947fabe4e829e5","level":"info","msg":"","name":"memoryStats.numBytesAllocatedHeap","origin":"nsync_bulker","time":"2016-07-11T15:36:56Z","unit":"count","value":1.695088e+06}'
+      ) do
 
-      it "adds the source tag" do
-        expect(subject["tags"]).to include "ValueMetric"
+        it "adds the source tag" do
+          expect(subject["tags"]).to include "firehose"
+        end
       end
     end
-  end
 
-  describe "when parsing ContainerMetric logs" do
-    when_parsing_log(
-      "@type" => "syslog",
-      "@message" => '<6>2016-04-12T10:18:19Z 0156bb68-1673-415f-a48c-f0783e44d156 doppler[4188]: {"cf_app_id":"6a4fa603-d03d-4d5d-9efc-73c4e815e053","cf_app_name":"notifications-ui","cf_org_id":"b152d3f9-ea0a-487a-b00c-688185a6ebcd","cf_org_name":"system","cf_origin":"firehose","cf_space_id":"0f7c1e0e-e9b5-4afe-a095-71a058afcb1f","cf_space_name":"notifications-with-ui","cpu_percentage":0.019206287207808037,"disk_bytes":17309696,"event_type":"ContainerMetric","instance_index":0,"level":"info","memory_bytes":11165696,"msg":"","origin":"rep","time":"2016-04-12T10:18:19Z"}'
-    ) do
+    describe "when parsing ContainerMetric logs" do
+      when_parsing_log(
+        "@type" => "syslog",
+        "@message" => '<6>2016-07-12T15:10:56Z 916d7a73-7f3b-467e-b50e-0e5b07690ea3 doppler[12128]: {"cf_app_id":"574069a6-bc4f-4d2b-9ad1-a0f7c7f494d6","cf_app_name":"apps-manager-js","cf_org_id":"ce88b618-b2b6-4526-ad87-b643c2323d37","cf_org_name":"system","cf_origin":"firehose","cf_space_id":"5936d220-f4dc-4ae4-9f38-f00042e5b2a2","cf_space_name":"system","cpu_percentage":0.03455660811827167,"deployment":"cf","disk_bytes":9920512,"event_type":"ContainerMetric","index":"0","instance_index":0,"ip":"10.0.16.19","job":"diego_cell-partition-6531e9947fabe4e829e5","level":"info","memory_bytes":7327744,"msg":"","origin":"rep","time":"2016-07-12T15:10:56Z"}'
+      ) do
 
-      it "adds the source tag" do
-        expect(subject["tags"]).to include "ContainerMetric"
+        it "adds the source tag" do
+          expect(subject["tags"]).to include "firehose"
+        end
       end
     end
-  end
 
+    describe "when parsing LogMessage logs" do
+      when_parsing_log(
+        "@type" => "syslog",
+        "@message" => '<6>2016-07-12T15:11:32Z 916d7a73-7f3b-467e-b50e-0e5b07690ea3 doppler[12128]: {"cf_app_id":"4c5a5ed9-c7af-4ae2-ad18-cf6625c91e26","cf_app_name":"notifications","cf_org_id":"ce88b618-b2b6-4526-ad87-b643c2323d37","cf_org_name":"system","cf_origin":"firehose","cf_space_id":"8e32563d-264c-435f-a3ea-d5843729ad0e","cf_space_name":"notifications-with-ui","deployment":"cf","event_type":"LogMessage","index":"0","ip":"10.0.16.19","job":"diego_cell-partition-6531e9947fabe4e829e5","level":"info","message_type":"OUT","msg":"[METRIC] {\"kind\":\"gauge\",\"payload\":{\"name\":\"notifications.queue.retry\",\"tags\":{\"count\":\"1\"},\"value\":0}}","origin":"rep","source_instance":"0","source_type":"APP","time":"2016-07-12T15:11:32Z","timestamp":1468336292051384719}'
+      ) do
 
-  describe "when parsing LogMessage logs" do
-    when_parsing_log(
-      "@type" => "syslog",
-      "@message" => '<6>2016-04-12T10:04:31Z 95c570e0-c2eb-4f43-b33e-69a456fe96f0 doppler[4176]: {"cf_app_id":"cfcb2d5a-244a-4c51-b22b-8562d13822a9","cf_app_name":"chatty-app","cf_org_id":"8b877d32-d147-4729-a8be-33df22f9221e","cf_org_name":"test","cf_origin":"firehose","cf_space_id":"d58e7bc0-72d0-45ef-9fdc-cdd168dee98b","cf_space_name":"test","event_type":"LogMessage","level":"info","message_type":"OUT","msg":"{\"data\":\"di7xex8gsfer85yykodbbi97qtaf3xrz\",\"time\":\"1460455471\"}","origin":"rep","source_instance":"3","source_type":"APP","time":"2016-04-12T10:04:31Z","timestamp":1460455471700095202}'
-    ) do
-
-      it "adds the source tag" do
-        expect(subject["tags"]).to include "LogMessage"
+        it "adds the source tag" do
+          expect(subject["tags"]).to include "firehose"
+        end
       end
     end
   end
