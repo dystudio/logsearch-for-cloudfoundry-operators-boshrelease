@@ -161,10 +161,6 @@ describe "firehose" do
         expect(subject["ContainerMetric"]["level"]).to eq nil
       end
 
-      it "drops ContainerMetric.origin" do
-        expect(subject["ContainerMetric"]["origin"]).to eq nil
-      end
-
       it "drops ContainerMetric.cf_origin" do
         expect(subject["ContainerMetric"]["cf_origin"]).to eq nil
       end
@@ -251,10 +247,6 @@ describe "firehose" do
 
       it "drops drop LogMessage.level" do
         expect(subject["LogMessage"]["level"]).to eq nil
-      end
-
-      it "drops LogMessage.origin" do
-        expect(subject["LogMessage"]["origin"]).to eq nil
       end
 
       it "adds the firehose tag" do
