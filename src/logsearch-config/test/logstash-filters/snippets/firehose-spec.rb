@@ -99,7 +99,7 @@ describe "firehose" do
       end
 
       it "sets @source.index to index" do
-        expect(subject["@source"]["index"]).to eq "0"
+        expect(subject["@source"]["index"]).to eq 0
       end
     end
   end
@@ -279,7 +279,7 @@ describe "firehose" do
       end
 
       it "sets @source.index to source_instance" do
-        expect(subject["@source"]["index"]).to eq "0"
+        expect(subject["@source"]["index"]).to eq 0
       end
     end
   end
@@ -331,7 +331,7 @@ describe "firehose" do
       end
 
       it "sets @source.index" do
-        expect(subject["@source"]["index"]).to eq "2"
+        expect(subject["@source"]["index"]).to eq 2
       end
     end
   end
