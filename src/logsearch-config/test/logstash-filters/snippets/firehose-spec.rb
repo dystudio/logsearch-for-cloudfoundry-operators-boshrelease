@@ -53,6 +53,10 @@ describe "firehose" do
         expect(subject["@timestamp"]).to eq Time.iso8601("2016-04-12T09:50:54Z")
       end
 
+      it "adds the ValueMetric tag" do
+        expect(subject["tags"]).to include "ValueMetric"
+      end
+
       it "sets @level to the loglevel" do
         expect(subject["@level"]).to eq "INFO"
       end
@@ -104,6 +108,10 @@ describe "firehose" do
     ) do
 
       it_behaves_like "a firehose log", original_message
+
+      it "adds the ContainerMetric tag" do
+        expect(subject["tags"]).to include "ContainerMetric"
+      end
 
       it "sets @timestamp" do
         expect(subject["@timestamp"]).to eq Time.iso8601("2016-07-12T11:37:56Z")
@@ -180,6 +188,10 @@ describe "firehose" do
     ) do
 
       it_behaves_like "a firehose log", original_message
+
+      it "adds the LogMessage tag" do
+        expect(subject["tags"]).to include "LogMessage"
+      end
 
       it "sets @timestamp" do
         expect(subject["@timestamp"]).to eq Time.iso8601("2016-07-12T12:48:34.280Z")
@@ -268,6 +280,10 @@ describe "firehose" do
     ) do
 
       it_behaves_like "a firehose log", original_message
+
+      it "adds the CounterEvent tag" do
+        expect(subject["tags"]).to include "CounterEvent"
+      end
 
       it "parses CounterEvent.name" do
         expect(subject["CounterEvent"]["name"]).to eq "dropsondeAgentListener.receivedByteCount"
