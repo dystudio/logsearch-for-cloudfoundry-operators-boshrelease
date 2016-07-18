@@ -17,10 +17,6 @@ describe "firehose" do
       expect(subject["tags"]).to include "firehose"
     end
 
-    it "parses the message as JSON under the key event_type" do
-      expect(subject[log_data["event_type"]]).to be_a Hash
-    end
-
     it "sets @source.deployment" do
       expect(subject["@source"]["deployment"]).to eq log_data["deployment"]
     end
@@ -55,6 +51,10 @@ describe "firehose" do
 
       it "adds the ValueMetric tag" do
         expect(subject["tags"]).to include "ValueMetric"
+      end
+
+      it "parses the message as JSON under the key ValueMetric" do
+        expect(subject["ValueMetric"]).to be_a Hash
       end
 
       it "sets @level to the loglevel" do
@@ -111,6 +111,10 @@ describe "firehose" do
 
       it "adds the ContainerMetric tag" do
         expect(subject["tags"]).to include "ContainerMetric"
+      end
+
+      it "parses the message as JSON under the key ContainerMetric" do
+        expect(subject["ContainerMetric"]).to be_a Hash
       end
 
       it "sets @timestamp" do
@@ -191,6 +195,10 @@ describe "firehose" do
 
       it "adds the LogMessage tag" do
         expect(subject["tags"]).to include "LogMessage"
+      end
+
+      it "parses the message as JSON under the key LogMessage" do
+        expect(subject["LogMessage"]).to be_a Hash
       end
 
       it "sets @timestamp" do
@@ -285,6 +293,10 @@ describe "firehose" do
         expect(subject["tags"]).to include "CounterEvent"
       end
 
+      it "parses the message as JSON under the key CounterEvent" do
+        expect(subject["CounterEvent"]).to be_a Hash
+      end
+
       it "parses CounterEvent.name" do
         expect(subject["CounterEvent"]["name"]).to eq "dropsondeAgentListener.receivedByteCount"
       end
@@ -315,6 +327,38 @@ describe "firehose" do
 
       it "sets @source.index" do
         expect(subject["@source"]["index"]).to eq "2"
+      end
+    end
+  end
+
+  describe "parsing Error logs" do
+    original_message = '{"cf_origin":"firehose","deployment":"cf","event_type":"Error","index":"2","ip":"10.0.16.79","job":"dedicated-node-partition-6531e9947fabe4e829e5","message":"some error","origin":"some component","source":"some other component","timestamp":"1468834783"}'
+    when_parsing_log(
+      "@type" => "syslog",
+      "syslog_program" => "doppler",
+      "@message" => original_message
+    ) do
+
+      it_behaves_like "a firehose log", original_message
+
+      it "adds the Error tag" do
+        expect(subject["tags"]).to include "Error"
+      end
+    end
+  end
+
+  describe "parsing HttpStartStop logs" do
+    original_message = '{"cf_app_id":"","cf_origin":"firehose","content_length":62,"deployment":"cf","duration_ms":10,"event_type":"HttpStartStop","index":"0","instance_id":"","instance_index":0,"ip":"10.0.16.11","job":"router-partition-6531e9947fabe4e829e5","level":"info","method":2,"msg":"","origin":"gorouter","peer_type":2,"remote_addr":"10.0.0.216:34311","request_id":"bc9c130a-108e-43fa-7f81-59a7e1495dad","start_timestamp":1468833200260359952,"status_code":401,"stop_timestamp":1468833200270723825,"time":"2016-07-18T09:13:20Z","uri":"http://52.51.147.85/oauth/token","user_agent":"Ruby"}'
+    when_parsing_log(
+      "@type" => "syslog",
+      "syslog_program" => "doppler",
+      "@message" => original_message
+    ) do
+
+      it_behaves_like "a firehose log", original_message
+
+      it "adds the Error tag" do
+        expect(subject["tags"]).to include "HttpStartStop"
       end
     end
   end
