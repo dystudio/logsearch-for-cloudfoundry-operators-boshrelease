@@ -30,6 +30,11 @@ describe "firehose" do
       expect(subject["@source"]["ip"]).to eq log_data["ip"]
     end
 
+    it "creates @source.vm from job and index" do
+      vm = "#{subject["@source"]["job"]}/#{subject["@source"]["index"]}"
+      expect(subject["@source"]["vm"]).to eq vm
+    end
+
     it "sets @type to the event_type" do
       expect(subject["@type"]).to eq log_data["event_type"]
     end
