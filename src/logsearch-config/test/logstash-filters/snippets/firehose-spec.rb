@@ -21,7 +21,7 @@ describe "firehose" do
       expect(subject[log_data["event_type"]]).to be_a Hash
     end
 
-    it "sets @source.deploymen" do
+    it "sets @source.deployment" do
       expect(subject["@source"]["deployment"]).to eq log_data["deployment"]
     end
 
