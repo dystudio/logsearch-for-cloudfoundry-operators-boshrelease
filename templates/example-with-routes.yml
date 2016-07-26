@@ -20,18 +20,25 @@ jobs:
   - {name: route_registrar, release: logsearch-for-cloudfoundry-operators}
   - {name: syslog_forwarder, release: logsearch}
   properties:
+    cf:
+      system_domain: cf_system_domain
+    nats:
+      machines: [nats-ip]
+      port: 4222
+      user: nats
+      password: nats-password
     route_registrar:
       routes:
       - name: logsearch
         port: 80
         uris:
-        - (( concat "logsearch." properties.cf.system_domain ))
+        - (( concat "logsearch." jobs.ls-router.properties.cf.system_domain ))
         registration_interval: 20s
       - name: logsearch_monitor
         port: 8080
         registration_interval: 20s
         uris:
-        - (( concat "logsearch_monitor." properties.cf.system_domain ))
+        - (( concat "logsearch_monitor." jobs.ls-router.properties.cf.system_domain ))
     syslog_forwarder:
       config:
        - {service: route_registrar, file: /var/vcap/sys/log/route_registrar/route_registrar.stdout.log}
@@ -53,15 +60,9 @@ jobs:
       firehose_user: doppler
       firehose_password: firehose-password
       firehose_events: [HttpStart,HttpStop,HttpStartStop,ValueMetric,CounterEvent,Error,ContainerMetric,HttpStart]
+    firehose:
+      subscription_id: logsearch
     syslog:
       host: (( grab jobs.ls-router.networks.default.static_ips.[0] ))
-      port: 514
+      port: 5514
 
-properties:
-  cf:
-    system_domain: cf_system_domain
-  nats:
-    machines: [nats-ip]
-    port: 4222
-    user: nats
-    password: nats-password
