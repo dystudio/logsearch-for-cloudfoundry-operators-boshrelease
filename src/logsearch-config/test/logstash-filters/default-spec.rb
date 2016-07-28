@@ -85,6 +85,10 @@ describe "The combined parsing rules" do
       it "adds the diego/json tag" do
         expect(subject["tags"]).to include "diego/json"
       end
+
+      it "sets @metadata.index to rep" do
+        expect(subject["@metadata"]["index"]).to eq "rep"
+      end
     end
   end
 end
