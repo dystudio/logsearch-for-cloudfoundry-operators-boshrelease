@@ -133,7 +133,7 @@ describe "index naming" do
 
   context "when parsing other logs" do
     when_parsing_log(
-      "@source" => { "program" => "staget" }
+      "@source" => { "program" => "stager" }
     ) do
 
       it "sets metadata.index to http_start_stop" do
