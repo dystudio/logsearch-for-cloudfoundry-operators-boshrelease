@@ -131,6 +131,17 @@ describe "index naming" do
     end
   end
 
+  context "when parsing ELB logs" do
+    when_parsing_log(
+      "@type" => "elblog"
+    ) do
+
+      it "sets metadata.index to elb" do
+        expect(subject["@metadata"]["index"]).to eq "elb"
+      end
+    end
+  end
+
   context "when parsing other logs" do
     when_parsing_log(
       "@source" => { "program" => "stager" }
