@@ -11,6 +11,7 @@ jobs:
   properties:
     logstash_parser:
       filters:
+      - (( append ))
       - logsearch-for-cf: /var/vcap/packages/parsing-rules-for-cf-ops/logstash-filters-default.conf
 
 - name: ls-router
