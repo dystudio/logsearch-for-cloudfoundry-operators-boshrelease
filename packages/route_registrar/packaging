@@ -2,6 +2,6 @@
 set -e
 
 mkdir -p $BOSH_INSTALL_TARGET/bin
-tar -xzf route-registrar-*.tar.gz
+tar -xzf route-registrar/route-registrar-*.tar.gz
 cp route-registrar-*/route-registrar $BOSH_INSTALL_TARGET/bin/
 
