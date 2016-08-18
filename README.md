@@ -6,7 +6,7 @@ meaning a properly configured LogSearch deployment is required in order to use t
 
 ## Configuring the deployment
 
-#### Configure and upload Logsearch
+### Configure and upload Logsearch
 
 In this step you are uploading the core logsearch-boshrelease, and preparing a base logsearch deploy manifest
 ```sh
@@ -18,7 +18,7 @@ $ scripts/generate_deployment_manifest $infrastructure stub.$infrastructure.exam
 $ bosh upload release https://bosh.io/d/github.com/logsearch/logsearch-boshrelease
 ```
 
-#### Configure and upload Logsearch for Cloud Foundry Operators
+### Configure and upload Logsearch for Cloud Foundry Operators
 
 In this step you are uploading the logsearch-for-cloudfoundry-operators-boshrelease extension
 
@@ -38,7 +38,7 @@ $ vim templates/example-with-basic-auth.yml
 $ scripts/generate_deployment_manifest ~/workspace/logsearch.yml templates/example-with-basic-auth.yml > ~/workspace/logsearch-for-cf-ops.yml
 ```
 
-#### Deploy
+### Deploy
 
 ```sh
 $ bosh deployment ~/workspace/logsearch-for-cf-ops.yml
