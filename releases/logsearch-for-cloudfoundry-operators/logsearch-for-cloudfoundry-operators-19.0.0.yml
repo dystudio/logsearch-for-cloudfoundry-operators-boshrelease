@@ -1,0 +1,38 @@
+---
+packages:
+- name: firehose-to-syslog
+  version: 46cd377eae22adc2c18cde69f25463f3795ef174
+  fingerprint: 46cd377eae22adc2c18cde69f25463f3795ef174
+  sha1: 20a7024332fcbe461d892b58864935a51597cebb
+  dependencies: []
+- name: parsing-rules-for-cf-ops
+  version: 8f7fbe1a81f7c91137e767e0b2b36297581e7fe2
+  fingerprint: 8f7fbe1a81f7c91137e767e0b2b36297581e7fe2
+  sha1: 01593309630cf37c2aa68e9844ed7f36cd331a06
+  dependencies: []
+- name: route_registrar
+  version: 3a434908d6e5fbcaf4eb486aa4fdd186c8325041
+  fingerprint: 3a434908d6e5fbcaf4eb486aa4fdd186c8325041
+  sha1: fc9af5cb603a619db4da454f1cc391f470562daf
+  dependencies: []
+jobs:
+- name: ingestor_cloudfoundry-firehose
+  version: 8320b2d5e98b3bd880699ce8eb7e0f6b60b690bf
+  fingerprint: 8320b2d5e98b3bd880699ce8eb7e0f6b60b690bf
+  sha1: 851baf6420505e7f70f2c8c8dd2e7a01a5e62c98
+- name: parsing-rules-for-cf-ops
+  version: e625b5aac3436160c00d4fd1e28ddb07d0462183
+  fingerprint: e625b5aac3436160c00d4fd1e28ddb07d0462183
+  sha1: 925f241c9493092be9e61b6fff940ce8f537b288
+- name: route_registrar
+  version: 50a6c3b5928b292d96511e928987d1b040367702
+  fingerprint: 50a6c3b5928b292d96511e928987d1b040367702
+  sha1: 9e4c7673ec4ccb9c4639c1ffd50c45e6c9ab4b1a
+license:
+  version: d3ff746e84cfd44e44b76c45ba6dc8cee675048c
+  fingerprint: d3ff746e84cfd44e44b76c45ba6dc8cee675048c
+  sha1: bcac0c456aaad4e7f4574c2e88c3f3a58341a631
+commit_hash: 7f6fffaa
+uncommitted_changes: true
+name: logsearch-for-cloudfoundry-operators
+version: 19.0.0
