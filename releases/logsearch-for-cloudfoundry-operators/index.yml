@@ -24,4 +24,6 @@ builds:
     version: 12.0.0
   151f8d0c-bd4c-447d-b9d0-307a7d3127f8:
     version: 17.0.0
+  bd653c04-e9ca-46b8-b6c4-892f327caa15:
+    version: 20.0.0
 format-version: '2'
