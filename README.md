@@ -1,3 +1,5 @@
+# This repo has been made available to the OSS Logsearch community as a reference. No pull requests or issues will be accepted or reviewed.
+
 # Logsearch for Cloud Foundry Operators
 
 Log parsing rules and other components useful for running LogSearch with the main purpose of monitoring Cloud Foundry deployments. 
