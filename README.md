@@ -46,3 +46,5 @@ $ scripts/generate_deployment_manifest ~/workspace/logsearch.yml templates/examp
 $ bosh deployment ~/workspace/logsearch-for-cf-ops.yml
 $ bosh deploy
 ```
+
+Tested to work with stemcell 3363
