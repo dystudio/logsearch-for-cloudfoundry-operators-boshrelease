@@ -30,4 +30,6 @@ builds:
     version: 21.0.0
   812ac1af-9581-4e4a-8229-65ad2a818c63:
     version: 30.0.0
+  481e1079-ef31-4a4e-ac6f-5818b6644a8e:
+    version: 31.0.0
 format-version: '2'
