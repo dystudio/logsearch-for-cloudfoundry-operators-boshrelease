@@ -53,6 +53,10 @@ describe "Diego component logs" do
         it "sets @timestamp from an iso8601 timestamp" do
           expect(subject["@timestamp"]).to eq Time.parse("2016-06-24T12:02:08.520Z")
         end
+
+        it "sets @timestamp_ns from iso8601 timestamp" do
+          expect(subject["@timestamp_ns"]).to eq 450354
+        end
       end
     end
   end
