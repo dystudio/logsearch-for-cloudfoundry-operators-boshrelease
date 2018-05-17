@@ -43,6 +43,20 @@ describe "Diego component logs" do
     end
   end
 
+  describe "alternate formats" do
+    context "for rep logs" do
+      when_parsing_log(
+        '@source' => { 'program' => 'rep' },
+        '@message' => '{"timestamp":"2016-06-24T05:02:08.520450354-07:00","source":"rep","message":"rep.executing-container-operation.starting","level":"DEBUG","data":{"container-guid":"6dcf9128-3762-4624-839f-0e640cec2ff1-6a9abb10-0757-4bd7-847b-623fb28b4661-9469e7e3-92b9-4305-4a75-882f1b04944d","session":"61"}}'
+      ) do
+
+        it "sets @timestamp from an iso8601 timestamp" do
+          expect(subject["@timestamp"]).to eq Time.parse("2016-06-24T12:02:08.520Z")
+        end
+      end
+    end
+  end
+
   describe "BBS log parsing rules" do
     when_parsing_log(
       '@source' => { 'program' => 'bbs' },
