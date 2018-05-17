@@ -33,7 +33,7 @@ describe "UAA Audit Spec Logs" do
         end
 
         it "sets @timestamp" do
-          expect(subject["@timestamp"]).to eq Time.iso8601("2015-08-25T03:57:46.033Z")
+          expect(subject["@timestamp"]).to eq Time.parse("2015-08-25T04:57:46.033").utc
         end
 
         it "removes the original timestamp field" do
@@ -67,7 +67,7 @@ describe "UAA Audit Spec Logs" do
         end
 
         it "sets @timestamp" do
-          expect(subject["@timestamp"]).to eq Time.iso8601("2015-08-25T03:57:46.033Z")
+          expect(subject["@timestamp"]).to eq Time.parse("2015-08-25T04:57:46.033").utc
         end
 
         it "removes the original timestamp field" do
